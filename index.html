@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku Master - Pure Vanilla JS Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header / Title -->
+    <header class="header">
+      <h1>Sudoku <span>Master</span></h1>
+    </header>
+
+    <!-- Game Controls & Status Bar -->
+    <section class="status-bar">
+      <div class="control-group">
+        <label for="difficulty-select">Difficulty:</label>
+        <select id="difficulty-select" class="select-input">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      
+      <div class="stats-group">
+        <div class="stat-box">
+          <span class="stat-label">Mistakes</span>
+          <span id="mistakes-count" class="stat-value">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Time</span>
+          <span id="timer-display" class="stat-value">00:00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Action Bar -->
+    <section class="action-bar">
+      <button id="btn-new-game" class="btn btn-primary">New Game</button>
+      <button id="btn-pause" class="btn btn-secondary">Pause</button>
+      <button id="btn-reset" class="btn btn-secondary">Reset Grid</button>
+    </section>
+
+    <!-- Main Sudoku Board Wrapper -->
+    <main class="board-wrapper">
+      <div id="sudoku-board" class="sudoku-board" tabindex="0"></div>
+      
+      <!-- Pause Overlay -->
+      <div id="pause-overlay" class="pause-overlay hidden">
+        <div class="pause-card">
+          <h2>Game Paused</h2>
+          <button id="btn-resume" class="btn btn-primary">Resume Game</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Interactive Numpad & Secondary Tools -->
+    <section class="numpad-container">
+      <div class="numpad-grid">
+        <button class="num-btn" data-value="1">1</button>
+        <button class="num-btn" data-value="2">2</button>
+        <button class="num-btn" data-value="3">3</button>
+        <button class="num-btn" data-value="4">4</button>
+        <button class="num-btn" data-value="5">5</button>
+        <button class="num-btn" data-value="6">6</button>
+        <button class="num-btn" data-value="7">7</button>
+        <button class="num-btn" data-value="8">8</button>
+        <button class="num-btn" data-value="9">9</button>
+      </div>
+      <div class="tool-grid">
+        <button id="btn-erase" class="tool-btn" title="Erase Cell (Delete/Backspace)">Erase</button>
+        <button id="btn-hint" class="tool-btn" title="Get Hint">Hint</button>
+        <button id="btn-check" class="tool-btn" title="Check Current Board">Check</button>
+        <button id="btn-solve" class="tool-btn danger" title="Auto Solve Puzzle">Solve</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Win / Victory Modal -->
+  <div id="win-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="trophy-icon">🏆</div>
+      <h2>Puzzle Solved!</h2>
+      <p class="modal-subtitle">Congratulations, you completed the Sudoku puzzle!</p>
+      <div class="modal-stats">
+        <div class="modal-stat-item">
+          <span class="label">Difficulty</span>
+          <span id="modal-difficulty" class="val">Medium</span>
+        </div>
+        <div class="modal-stat-item">
+          <span class="label">Time Taken</span>
+          <span id="modal-time" class="val">05:23</span>
+        </div>
+        <div class="modal-stat-item">
+          <span class="label">Mistakes</span>
+          <span id="modal-mistakes" class="val">2</span>
+        </div>
+      </div>
+      <button id="btn-play-again" class="btn btn-primary full-width">Play Again</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
